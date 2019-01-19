@@ -43,6 +43,34 @@ $(document).ready(function(){
 
     database.ref().on("child_added", function(childSnapshot){ 
         console.log(childSnapshot.val());
+        var rowVar = $("<tr>");
+        var dataNameVar = $("<td>");
+        var dataRoleVar = $("<td>");
+        var dataDateVar = $("<td>");
+        var dataMonthsVar = $("<td>");
+        var dataRateVar = $("<td>");
+        var dataTotalVar = $("<td>");
+
+        var today = moment(new Date());
+        var employeeDate = moment(childSnapshot.val().date);
+
+        months = today.diff(employeeDate, "months");
+
+        var payment = childSnapshot.val().rate;
+        
+        dataNameVar.text(childSnapshot.val().name);
+        dataRoleVar.text(childSnapshot.val().role);
+        dataDateVar.text(childSnapshot.val().date);
+        dataMonthsVar.text(months);
+        dataRateVar.text(childSnapshot.val().rate);
+        dataTotalVar.text(months*payment);
+
+        
+
+        rowVar.append(dataNameVar, dataRoleVar, dataDateVar,dataMonthsVar, dataRateVar, dataTotalVar);
+
+        $("#employee-content").append(rowVar);
+
     });
 
 });

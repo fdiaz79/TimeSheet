@@ -34,7 +34,15 @@ $(document).ready(function(){
         console.log(newEmp.date);
         console.log(newEmp.rate);
 
+        $("#employee-name").val("");
+        $("#employee-role").val("");
+        $("#employee-date").val("");
+        $("#employee-rate").val("");
 
+    });
+
+    database.ref().on("child_added", function(childSnapshot){ 
+        console.log(childSnapshot.val());
     });
 
 });
